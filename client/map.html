@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="css/map.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <title>emptionmap - эмоциональная карта города</title>
+  </head>
+  <body>
+    <header>
+      <span class="logo"
+        ><img src="assests/icons/4599477.png" alt="" width="32" height="32" />
+        emotionmap</span
+      >
+      <nav>
+        <ul>
+          <li class="active">Карта</li>
+          <li class="map"><a href="about.html">О проекте</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div class="container">
+
+      <section class="hero">
+  <h2>Оставьте свою эмоцию и сделайте вклад в изучение городской среды</h2>
+  <a href="/" class="hero-button">🏠 Вернуться на главную</a>
+  <h4>&#9660; листайте вниз &#9660;</h4>
+</section>
+
+      <div id="map"></div>
+
+      <div id="emotionModal" class="emotion-modal">
+        <div class="modal-content">
+            <h3 class="modal-title">Выберите эмоцию для этого места</h3>
+            
+            <div class="emotion-options">
+                <div class="emotion-option" data-emotion="happy">
+                    <span class="emotion-emoji">🎉</span>
+                    <span class="emotion-name">Радость</span>
+                </div>
+                <div class="emotion-option" data-emotion="calm">
+                    <span class="emotion-emoji">😊</span>
+                    <span class="emotion-name">Спокойствие</span>
+                </div>
+                <div class="emotion-option" data-emotion="neutral">
+                    <span class="emotion-emoji">😐</span>
+                    <span class="emotion-name">Нейтрально</span>
+                </div>
+                <div class="emotion-option" data-emotion="sad">
+                    <span class="emotion-emoji">😢</span>
+                    <span class="emotion-name">Грусть</span>
+                </div>
+                <div class="emotion-option" data-emotion="angry">
+                    <span class="emotion-emoji">😠</span>
+                    <span class="emotion-name">Раздражение</span>
+                </div>
+            </div>
+            
+            <textarea class="comment-input" placeholder="Почему это место вызывает такие эмоции? (необязательно)"></textarea>
+            
+            <div class="modal-buttons">
+                <button class="modal-btn btn-cancel" id="cancelBtn">Отмена</button>
+                <button class="modal-btn btn-add" id="addBtn" disabled>Добавить</button>
+            </div>
+
+        </div>
+      </div>
+    </div>
+    <footer class="modern-footer">
+        <div class="footer-container">
+          <div class="footer-section">
+            <h3 class="footer-logo">
+              <img src="assests/icons/4599477.png" alt="EmotionMap" width="24" height="24" />
+              EmotionMap
+            </h3>
+            <p class="footer-description">
+              Эмоциональная карта города, созданная вами. Исследуйте настроения, делитесь впечатлениями и помогайте делать город лучше.
+            </p>
+            <div class="social-links">
+        <a href="https://vk.com/id791334928" target="_blank" aria-label="VK"><img src="assests/icons/icons8-vk-50.png" alt=""></a>
+        <a href="https://t.me/Ilya14032" target="_blank" aria-label="Telegram"><img src="assests/icons/icons8-telegram-50.png" alt=""></a>
+        <a href="mailto:nowaakk32@gmail.com" aria-label="Email"><img src="assests/icons/icons8-gmail-50.png" alt=""></a>
+            </div>
+          </div>
+          <div class="footer-section">
+            <h4>Навигация</h4>
+            <ul class="footer-links">
+              <li><a href="/">Главная</a></li>
+              <li><a href="/map.html">Карта</a></li>
+              <li><a href="/about.html">О проекте</a></li>
+              <li><a href="#stats-section">Статистика</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h4>Контакты</h4>
+            <p>📍 Калач, Воронежская область</p>
+            <p>📞 +7 939 945 30 93</p>
+            <p>✉️ nowaakk32@gmail.com</p>
+            <p>👨‍💻 Автор: Илья Бабин</p>
+          </div>
+
+    <!-- Колонка 4: Доп. информация -->
+    <div class="footer-section">
+      <h4>EmotionMap</h4>
+      <ul class="footer-links">
+        <li>5000+ строк кода</li>
+        <li>Собиралось с сентября 2025</li>
+        <li>100% самостоятельная работа</li>
+        <li>Технологии: html, css, Node.js, Leaflet, SQLite</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2026 EmotionMap. Все права защищены.</p>
+    <p>Сделано с ❤️ в Калаче</p>
+  </div>
+</footer>
+
+      <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  const SERVER_URL = window.location.origin;
+  let map, selectedEmotion = null, clickCoords = null;
+
+  function initInteractiveMap() {
+    map = L.map('map').setView([50.424119, 41.01624], 12);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    loadMarkers();
+    map.on('click', (e) => showEmotionModal(e.latlng.lat, e.latlng.lng));
+  }
+
+  async function loadMarkers() {
+    try {
+      const res = await fetch(`${SERVER_URL}/api/markers`);
+      const markers = await res.json();
+      const emoji = { happy: '🎉', calm: '😊', neutral: '😐', sad: '😢', angry: '😠' };
+      const names = { happy: 'Радость', calm: 'Спокойствие', neutral: 'Нейтрально', sad: 'Грусть', angry: 'Раздражение' };
+
+      markers.forEach(m => {
+        const icon = L.divIcon({
+          html: `<div class="emotion-marker marker-${m.emotion}">${emoji[m.emotion]}</div>`,
+          iconSize: [40, 40],
+          iconAnchor: [20, 20]
+        });
+        const popup = `<b>${names[m.emotion]}</b>${m.comment ? `<br><i>${m.comment}</i>` : ''}`;
+        L.marker([m.lat, m.lng], { icon }).addTo(map).bindPopup(popup);
+      });
+    } catch (e) { console.error(e); }
+  }
+
+  function showEmotionModal(lat, lng) {
+    clickCoords = { lat, lng };
+    selectedEmotion = null;
+    document.querySelector('.comment-input').value = '';
+    document.querySelectorAll('.emotion-option').forEach(el => el.classList.remove('selected'));
+    document.getElementById('addBtn').disabled = true;
+    document.getElementById('emotionModal').style.display = 'flex';
+  }
+
+  function hideEmotionModal() {
+    document.getElementById('emotionModal').style.display = 'none';
+  }
+
+  async function saveMarker(lat, lng, emotion, comment) {
+    const res = await fetch(`${SERVER_URL}/api/markers`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ lat, lng, emotion, comment })
+    });
+    if (!res.ok) throw new Error((await res.json()).error || 'Ошибка сервера');
+    return await res.json();
+  }
+
+  function notify(text, isError = false) {
+    const el = document.createElement('div');
+    el.className = `notification${isError ? ' error' : ''}`;
+    el.textContent = text;
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 3000);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    initInteractiveMap();
+
+    // Выбор эмоции
+    document.querySelectorAll('.emotion-option').forEach(opt => {
+      opt.addEventListener('click', () => {
+        document.querySelectorAll('.emotion-option').forEach(o => o.classList.remove('selected'));
+        opt.classList.add('selected');
+        selectedEmotion = opt.dataset.emotion;
+        document.getElementById('addBtn').disabled = false;
+      });
+    });
+
+    // Добавить метку
+    document.getElementById('addBtn').addEventListener('click', async () => {
+      if (!selectedEmotion || !clickCoords) return;
+      const btn = document.getElementById('addBtn');
+      const comment = document.querySelector('.comment-input').value;
+      btn.disabled = true;
+      btn.textContent = 'Добавляем...';
+      try {
+        await saveMarker(clickCoords.lat, clickCoords.lng, selectedEmotion, comment);
+        notify('Эмоция добавлена!');
+        hideEmotionModal();
+        // Можно перезагрузить метки или добавить локально — как у тебя было
+      } catch (e) {
+        notify(`Ошибка: ${e.message}`, true);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Добавить';
+      }
+    });
+
+    // Отмена
+    document.getElementById('cancelBtn').addEventListener('click', hideEmotionModal);
+    document.getElementById('emotionModal').addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) hideEmotionModal();
+    });
+  });
+</script>
+
+  </body>
+</html>

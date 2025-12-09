@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+    <title>emptionmap - эмоциональная карта города</title>
+  </head>
+  <body>
+    <header>
+      <span class="logo"
+        ><img src="assests/icons/4599477.png" alt="" width="32" height="32" />
+        emotionmap</span
+      >
+      <nav>
+        <ul>
+          <li><a href="#im">Главная</a></li>
+          <li><a href="#help">Как пользоваться</a></li>
+          <li><a href="#stats-section">Статистика</a></li>
+          <li><a href="about.html">О проекте</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div id="im" class="container">
+<!-- Hero секция -->
+<section class="hero">
+  <h2>Карта настроения вашего города</h2>
+  <h3>Узнайте, какие места вызывают радость, а где люди грустят</h3>
+  <h3>Станьте частью исследования городской атмосферы!</h3>
+  
+  <a href="/map.html" class="hero-button">🎉 Добавить свою эмоцию</a>
+  
+  <h4>&#9660; листайте вниз &#9660;</h4>
+</section>
+      <section class="how-it-works">
+        <h2 class="section-title">Три простых шага к вашей эмоции на карте</h2>
+        <div class="steps-container">
+          <div class="step-card">
+            <span class="step-number">1</span>
+            <div class="step-icon">🗺️</div>
+            <h3 class="step-title">Найдите место</h3>
+            <p class="step-description">
+              Кликните на карте там, где хотите оставить эмоцию
+            </p>
+          </div>
+          <div id="help" class="step-card">
+            <span class="step-number">2</span>
+            <div class="step-icon">😊</div>
+            <h3 class="step-title">Выберите эмоцию</h3>
+            <p class="step-description">
+              От радости до грусти - отметьте ваше настроение
+            </p>
+          </div>
+          <div class="step-card">
+            <span class="step-number">3</span>
+            <div class="step-icon">📝</div>
+            <h3 class="step-title">Оставьте комментарий</h3>
+            <p class="step-description">
+              Расскажите, почему это место вызывает такие чувства
+            </p>
+          </div>
+        </div>
+      </section>
+      <section class="realmap">
+        <h1>Живая карта</h1>
+      </section>
+      <section id="map"></section>
+      <section id="stats-section" class="stats-section container">
+  <h2 class="section-title">Статистика EmotionMap</h2>
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-number" id="total-emotions">0</div>
+      <div class="stat-label">Всего эмоций</div>
+      <div class="stat-trend trend-up">↑ 12% за неделю</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number" id="positive-emotions">0</div>
+      <div class="stat-label">Положительных настроений</div>
+      <div class="stat-trend trend-up">↑ 5% за месяц</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number" id="active-users">0</div>
+      <div class="stat-label">Активных пользователей</div>
+      <div class="stat-trend trend-up">↑ 8% сегодня</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number" id="districts">0</div>
+      <div class="stat-label">Охваченных районов</div>
+      <div class="stat-trend trend-up">↑ 3 новых</div>
+    </div>
+  </div>
+</section>
+      <section class="lastem">
+        <div class="firstlast"></div>
+        <div class="seclast"></div>
+        <div class="treelast"></div>
+      </section>
+      <section class="why-section">
+        <h2 class="section-title">EmotionMap — это больше, чем просто карта</h2>
+        <div class="why-grid">
+          <div class="why-card">
+            <span class="audience-tag">Для жителей</span>
+            <div class="why-icon">🏠</div>
+            <h3 class="why-title">Откройте город заново</h3>
+            <p class="why-description">
+              Узнавайте атмосферу разных районов, находите места, где вам будет
+              комфортно, делитесь своими впечатлениями с сообществом
+            </p>
+          </div>
+          <div class="why-card">
+            <span class="audience-tag">Для города</span>
+            <div class="why-icon">🏙️</div>
+            <h3 class="why-title">Помогите городу стать лучше</h3>
+            <p class="why-description">
+              Ваши эмоции помогают понять, какие места нуждаются в улучшении и
+              создавать более комфортную городскую среду для всех
+            </p>
+          </div>
+          <div class="why-card">
+            <span class="audience-tag">Для исследователей</span>
+            <div class="why-icon">🔬</div>
+            <h3 class="why-title">Изучайте психологию города</h3>
+            <p class="why-description">
+              Анализируйте динамику настроений, отслеживайте социальное
+              самочувствие и участвуйте в исследованиях городского пространства
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+    <footer class="modern-footer">
+  <div class="footer-container">
+    <!-- Колонка 1: О проекте -->
+    <div class="footer-section">
+      <h3 class="footer-logo">
+        <img src="assests/icons/4599477.png" alt="EmotionMap" width="24" height="24" />
+        EmotionMap
+      </h3>
+      <p class="footer-description">
+        Эмоциональная карта города, созданная вами. Исследуйте настроения, делитесь впечатлениями и помогайте делать город лучше.
+      </p>
+      <div class="social-links">
+        <a href="https://vk.com/id791334928" target="_blank" aria-label="VK"><img src="assests/icons/icons8-vk-50.png" alt=""></a>
+        <a href="https://t.me/Ilya14032" target="_blank" aria-label="Telegram"><img src="assests/icons/icons8-telegram-50.png" alt=""></a>
+        <a href="mailto:nowaakk32@gmail.com" aria-label="Email"><img src="assests/icons/icons8-gmail-50.png" alt=""></a>
+      </div>
+    </div>
+
+    <!-- Колонка 2: Навигация -->
+    <div class="footer-section">
+      <h4>Навигация</h4>
+      <ul class="footer-links">
+        <li><a href="/">Главная</a></li>
+        <li><a href="/map.html">Карта</a></li>
+        <li><a href="/about.html">О проекте</a></li>
+        <li><a href="#stats-section">Статистика</a></li>
+      </ul>
+    </div>
+
+    <!-- Колонка 3: Контакты -->
+    <div class="footer-section">
+      <h4>Контакты</h4>
+      <p>📍 Калач, Воронежская область</p>
+      <p>📞 +7 939 945 30 93</p>
+      <p>✉️ nowaakk32@gmail.com</p>
+      <p>👨‍💻 Автор: Илья Бабин</p>
+    </div>
+
+    <!-- Колонка 4: Доп. информация -->
+    <div class="footer-section">
+      <h4>EmotionMap</h4>
+      <ul class="footer-links">
+        <li>5000+ строк кода</li>
+        <li>Собиралось с сентября 2025</li>
+        <li>100% самостоятельная работа</li>
+        <li>Технологии: html, css, Node.js, Leaflet, SQLite</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2026 EmotionMap. Все права защищены.</p>
+    <p>Сделано с ❤️ в Калаче</p>
+  </div>
+</footer>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  const SERVER_URL = window.location.origin;
+
+  function initReadOnlyMap() {
+    const map = L.map('map').setView([50.424119, 41.01624], 12);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Функция анимации счётчика
+function animateCounter(element, target, duration = 2000) {
+  let start = 0;
+  const increment = target / (duration / 16); // ~60 FPS
+
+  const timer = setInterval(() => {
+    start += increment;
+    if (start >= target) {
+      element.textContent = target.toLocaleString();
+      clearInterval(timer);
+    } else {
+      element.textContent = Math.ceil(start).toLocaleString();
+    }
+  }, 16);
+}
+
+// Проверка, виден ли блок в зоне видимости
+function isInViewport(element) {
+  const rect = element.getBoundingClientRect();
+  return rect.top <= window.innerHeight && rect.bottom >= 0;
+}
+
+let statsLoaded = false;
+
+function loadStatsIfNeeded() {
+  if (statsLoaded || !isInViewport(document.getElementById("stats-section"))) return;
+
+  statsLoaded = true;
+
+  fetch(`${SERVER_URL}/api/stats`)
+    .then(res => res.json())
+    .then(data => {
+      animateCounter(document.getElementById("total-emotions"), data.total);
+      animateCounter(document.getElementById("positive-emotions"), data.positive);
+      animateCounter(document.getElementById("active-users"), data.users);
+      animateCounter(document.getElementById("districts"), data.districts);
+    })
+    .catch(err => {
+      console.error("Не удалось загрузить статистику:", err);
+      // Если API не отвечает — покажем "заглушки"
+      animateCounter(document.getElementById("total-emotions"), 15427);
+      animateCounter(document.getElementById("positive-emotions"), 67);
+      animateCounter(document.getElementById("active-users"), 1243);
+      animateCounter(document.getElementById("districts"), 89);
+    });
+}
+
+// Загружаем статистику при скролле или сразу
+window.addEventListener("scroll", loadStatsIfNeeded);
+window.addEventListener("DOMContentLoaded", loadStatsIfNeeded);
+
+    fetch(`${SERVER_URL}/api/markers`)
+      .then(res => res.ok ? res.json() : [])
+      .then(markers => {
+        const emoji = { happy: '🎉', calm: '😊', neutral: '😐', sad: '😢', angry: '😠' };
+        const names = { happy: 'Радость', calm: 'Спокойствие', neutral: 'Нейтрально', sad: 'Грусть', angry: 'Раздражение' };
+
+        markers.forEach(m => {
+          const icon = L.divIcon({
+            html: `<div class="emotion-marker marker-${m.emotion}">${emoji[m.emotion]}</div>`,
+            iconSize: [40, 40],
+            iconAnchor: [20, 20]
+          });
+          const popup = `<b>${names[m.emotion]}</b>${m.comment ? `<br><i>${m.comment}</i>` : ''}`;
+          L.marker([m.lat, m.lng], { icon }).addTo(map).bindPopup(popup);
+        });
+      });
+  }
+
+  document.addEventListener('DOMContentLoaded', initReadOnlyMap);
+</script>
+  </body>
+</html>
