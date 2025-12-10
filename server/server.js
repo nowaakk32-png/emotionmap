@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 // Отдаём статику из client/
-app.use(express.static(path.join(__dirname, "../client")));
+app.use(express.static(path.join(__dirname, "../../client")));
 
 // Подключаем БД
 const db = new sqlite3.Database(path.join(__dirname, "emotions.db"), (err) => {
@@ -142,4 +142,5 @@ app.get("/about.html", (req, res) => res.sendFile(path.join(__dirname, "../clien
 // Запуск
 app.listen(PORT, () => {
   console.log(`✅ EmotionMap запущен: http://localhost:${PORT}`);
+
 });
