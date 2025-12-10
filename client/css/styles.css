@@ -7,37 +7,26 @@ body {
   background-repeat: no-repeat;
 }
 
-/* Сброс стилей */
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
-/* Совместимость */
 html {
-  -webkit-text-size-adjust: 100%;
-  -ms-text-size-adjust: 100%;
+  scroll-behavior: smooth;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  line-height: 1.6;
-  color: #000;
-  background-color: #fff;
-}
-
-/* Убираем выделение у интерактивных элементов */
-button, a, input, textarea {
-  -webkit-tap-highlight-color: transparent;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
 }
 
 #map {
-  width: 100%;
-  max-width: 1300px;
-  height: 50vmin;
-  min-height: 400px;
-  margin: 40px auto;
+  padding-left: 10px;
+  padding-right: 10px;
+  height: 500px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
 }
 
 a {
@@ -49,13 +38,10 @@ img {
 }
 
 .container {
-  max-width: 1400px;
-  width: 100%;
-  padding: 0 16px;
+  width: 1400px;
+  max-width: 95%;
   margin: 0 auto;
-  box-sizing: border-box;
-  background: #fff;
-  border-radius: 30px;
+  padding-bottom: 30px; /* ← именно так! */
 }
 
 header {
@@ -112,10 +98,9 @@ header span img {
   top: 7px;
 }
 
-.container::before {
-  content: "";
-  display: table;
-  clear: both;
+.container {
+  background: #fff;
+  border-radius: 30px;
 }
 
 /* === УПРОЩЁННАЯ HERO-СЕКЦИЯ (БЕЗ ФОНА, ТЁМНЫЙ ТЕКСТ) === */
@@ -131,7 +116,7 @@ header span img {
 }
 
 .hero h2 {
-  font-size: clamp(1.8rem, 5vw, 3.2rem);
+  font-size: 3.0rem;
   font-weight: 800;
   margin-bottom: 20px;
   color: #1a1a1a; /* Почти чёрный */
@@ -139,7 +124,7 @@ header span img {
 }
 
 .hero h3 {
-  font-size: clamp(1.2rem, 3.5vw, 1.8rem);
+  font-size: 1.4rem;
   font-weight: 400;
   color: #333333; /* Тёмно-серый */
   margin-bottom: 12px;
@@ -152,8 +137,8 @@ header span img {
 .hero-button {
   display: inline-block;
   margin-top: 35px;
-  font-size: clamp(1rem, 2.8vw, 1.4rem);
-  padding: 12px 28px;
+  padding: 14px 36px;
+  font-size: 1.3rem;
   font-weight: 600;
   color: white;
   text-decoration: none;
@@ -226,8 +211,7 @@ header span img {
 }
 
 .step-card {
-  flex: 1 1 300px; /* растягивается, но не уже 300px */
-  min-width: 0; /* важно при flex, чтобы не ломалась layout */
+  flex: 1;
   background: white;
   padding: 40px 25px;
   border-radius: 20px;
@@ -312,6 +296,7 @@ header span img {
   border-color: #667eea;
 }
 
+/* Стили для статистики */
 .stats-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -422,7 +407,7 @@ header span img {
 
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 30px;
   max-width: 1200px;
   margin: 0 auto;
@@ -546,12 +531,12 @@ header span img {
 .modern-footer {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  padding: 40px 20px 20px;
+  padding: 50px 0 20px;
   margin-top: 80px;
 }
 
 .footer-container {
-  width: min(1200px, 100% - 40px);
+  width: 1200px;
   max-width: 95%;
   margin: 0 auto;
   display: grid;
@@ -688,17 +673,3 @@ header span img {
 .marker-neutral { background: linear-gradient(135deg, #9E9E9E, #616161); } /* Серый */
 .marker-sad     { background: linear-gradient(135deg, #2962FF, #0D47A1); } /* Синий */
 .marker-angry   { background: linear-gradient(135deg, #FF1744, #D50000); } /* Красный */
-
-/* Для Safari и старых мобильных */
-@media not all and (min-resolution: 0.001dpcm) {
-  @supports (-webkit-appearance: none) {
-    .hero-button {
-      padding: 14px 30px;
-    }
-  }
-}
-
-
-
-
-
