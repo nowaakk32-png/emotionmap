@@ -108,6 +108,12 @@ header span img {
   top: 7px;
 }
 
+.container::before {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 .container {
   background: #fff;
   border-radius: 30px;
@@ -691,3 +697,4 @@ header span img {
     }
   }
 }
+
