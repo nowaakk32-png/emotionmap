@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="ru">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="css/map.css" />
@@ -121,7 +123,7 @@
   </div>
 </footer>
 
-      <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
   const SERVER_URL = window.location.origin;
   let map, selectedEmotion = null, clickCoords = null;
@@ -224,8 +226,13 @@
     document.getElementById('emotionModal').addEventListener('click', (e) => {
       if (e.target === e.currentTarget) hideEmotionModal();
     });
+    // Исправление для Firefox и Safari
+    if (!window.location.origin) {
+      window.location.origin = window.location.protocol + "//" + window.location.host;
+    }
   });
 </script>
 
   </body>
 </html>
+
