@@ -274,9 +274,15 @@ window.addEventListener("DOMContentLoaded", loadStatsIfNeeded);
         });
       });
   }
+  // Исправление для Firefox и Safari
+  if (!window.location.origin) {
+    window.location.origin = window.location.protocol + "//" + window.location.host;
+  }
 
   document.addEventListener('DOMContentLoaded', initReadOnlyMap);
+
 </script>
   </body>
 </html>
+
 
