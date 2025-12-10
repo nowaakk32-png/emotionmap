@@ -50,8 +50,11 @@ img {
 
 .container {
   width: min(1400px, 100% - 40px);
+  max-width: 1400px;
   margin: 0 auto;
   padding: 0 20px;
+  background: #fff;
+  border-radius: 30px;
 }
 
 header {
@@ -112,11 +115,6 @@ header span img {
   content: "";
   display: table;
   clear: both;
-}
-
-.container {
-  background: #fff;
-  border-radius: 30px;
 }
 
 /* === УПРОЩЁННАЯ HERO-СЕКЦИЯ (БЕЗ ФОНА, ТЁМНЫЙ ТЕКСТ) === */
@@ -697,4 +695,5 @@ header span img {
     }
   }
 }
+
 
