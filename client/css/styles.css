@@ -204,6 +204,11 @@ header span img {
 }
 
 .how-it-works {
+  display: flex;
+  flex-wrap: wrap; /* ← ОБЯЗАТЕЛЬНО! */
+  gap: 16px;
+  width: 100%;
+  margin: 0;
   padding: 80px 20px;
   background: #fff;
   text-align: center;
@@ -226,7 +231,8 @@ header span img {
 }
 
 .step-card {
-  flex: 1;
+  flex: 1 1 300px; /* растягивается, но не уже 300px */
+  min-width: 0; /* важно при flex, чтобы не ломалась layout */
   background: white;
   padding: 40px 25px;
   border-radius: 20px;
@@ -696,6 +702,7 @@ header span img {
     }
   }
 }
+
 
 
 
