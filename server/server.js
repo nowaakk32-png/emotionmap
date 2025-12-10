@@ -13,9 +13,12 @@ app.use(express.json());
 // Отдаём статику из client/
 app.use(express.static(path.join(__dirname, "../client")));
 
-// Подключаем БД
-const db = new sqlite3.Database(path.join(__dirname, "emotions.db"), (err) => {
-  if (err) console.error("❌ Не удалось создать emotions.db:", err.message);
+const db = new sqlite3.Database('./database.sqlite', (err) => {
+  if (err) {
+    console.error('Не удалось открыть базу:', err.message);
+  } else {
+    console.log('База данных подключена');
+  }
 });
 
 // Создаём таблицу при старте
@@ -144,4 +147,5 @@ app.listen(PORT, () => {
   console.log(`✅ EmotionMap запущен: http://localhost:${PORT}`);
 
 });
+
 
