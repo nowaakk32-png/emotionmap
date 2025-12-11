@@ -1,5 +1,22 @@
+/* === ГЛОБАЛЬНЫЕ СТИЛИ === */
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
 body {
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.6;
+  color: #000;
   background-image: url(../assests/icons/pedro-lastra-Nyvq2juw4_o-unsplash.jpg);
   background-attachment: fixed;
   background-size: cover;
@@ -7,119 +24,93 @@ body {
   background-repeat: no-repeat;
 }
 
-/* Сброс стилей */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* Совместимость */
-html {
-  -webkit-text-size-adjust: 100%;
-  -ms-text-size-adjust: 100%;
-}
-
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  line-height: 1.6;
-  color: #000;
-  background-color: #fff;
-}
-
-/* Убираем выделение у интерактивных элементов */
-button, a, input, textarea {
-  -webkit-tap-highlight-color: transparent;
-}
-
-#map {
-  width: 1300px;
-  height: 500px;
-  border: 2px solid #ccc;
-  border-radius: 20px;
-  margin-top: 30px;
-  margin-left: 50px;
-}
-
-
 a {
   text-decoration: none;
+  color: inherit;
 }
 
 img {
   max-width: 100%;
+  height: auto;
   border-radius: 10px;
 }
 
+button, a, input, textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* === КОНТЕЙНЕР === */
 .container {
-  width: min(1400px, 100% - 40px);
+  max-width: 1400px;
+  width: 100%;
   margin: 0 auto;
-  padding-bottom: 60px;
+  padding: 0 20px 60px;
+  background: #fff;
+  border-radius: 30px;
 }
 
+/* === ШАПКА === */
 header {
-  width: 1400px;
+  max-width: 1400px;
+  width: 100%;
   margin: 0 auto;
-  padding: 50px 0;
-}
-
-header span img {
-  position: relative;
-  top: 7px;
+  padding: 50px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
 header .logo {
   text-transform: uppercase;
   font-weight: 800;
-}
-
-header .logo {
   background: #fff;
   padding: 15px 17px;
   border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.2rem;
 }
 
-header nav {
-  float: right;
-  width: 20%;
-  justify-content: space-between;
+header span img {
+  display: block;
 }
 
 header nav ul {
-  justify-content: space-between;
   list-style: none;
   display: flex;
-}
-
-header nav ul li {
-  display: inline-block;
-  font-weight: 600;
-}
-
-header nav ul {
+  gap: 15px;
   background: #fff;
   padding: 9px 17px;
   border-radius: 20px;
+  margin: 0;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+header nav ul li {
+  font-weight: 600;
+  display: flex;
 }
 
 header nav ul li a {
-  color: #000000;
+  color: #000;
 }
 
-header nav ul li:hover:not(.active) {
-  font-weight: 900;
-  transition: all 700ms ease;
-  transition: all 500ms ease-in;
+header .map {
+  margin-top: 0;
 }
 
 header .active {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  border: none;
   padding: 5px 10px;
   border-radius: 25px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
+  user-select: none;
 }
 
 header .active:hover {
@@ -128,44 +119,31 @@ header .active:hover {
   background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
 }
 
-header .map {
-  margin-top: 5px;
-}
-
-.container {
-  background: #fff;
-  border-radius: 30px;
-}
-
-/* === УПРОЩЁННАЯ HERO-СЕКЦИЯ (БЕЗ ФОНА, ТЁМНЫЙ ТЕКСТ) === */
+/* === HERO === */
 .hero {
   text-align: center;
   padding: 80px 20px 60px;
   margin: 60px auto;
   max-width: 900px;
-  /* Полностью прозрачно — фон страницы просвечивает */
   background: transparent;
-  box-shadow: none;
-  border: none;
 }
 
 .hero h2 {
-  font-size: 3.0rem;
+  font-size: 3rem;
   font-weight: 800;
   margin-bottom: 20px;
-  color: #1a1a1a; /* Почти чёрный */
+  color: #1a1a1a;
   line-height: 1.2;
 }
 
 .hero h3 {
   font-size: 1.4rem;
   font-weight: 400;
-  color: #333333; /* Тёмно-серый */
+  color: #333;
   margin-bottom: 12px;
   line-height: 1.5;
   max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
+  margin-inline: auto;
 }
 
 .hero-button {
@@ -175,7 +153,6 @@ header .map {
   font-size: 1.3rem;
   font-weight: 600;
   color: white;
-  text-decoration: none;
   background: linear-gradient(135deg, #667eea, #764ba2);
   border-radius: 50px;
   box-shadow: 0 4px 15px rgba(102, 126, 234, 0.35);
@@ -190,7 +167,7 @@ header .map {
 .hero h4 {
   margin-top: 50px;
   font-size: 1.05rem;
-  color: #666666; /* Серый */
+  color: #666;
   animation: bounce-arrow 2s infinite;
 }
 
@@ -200,31 +177,10 @@ header .map {
   60% { transform: translateY(-5px); }
 }
 
-/* Адаптивность */
-@media (max-width: 768px) {
-  .hero {
-    padding: 60px 15px 45px;
-    margin: 40px 15px;
-  }
-  .hero h2 {
-    font-size: 2.2rem;
-  }
-  .hero h3 {
-    font-size: 1.2rem;
-  }
-  .hero-button {
-    padding: 12px 30px;
-    font-size: 1.2rem;
-  }
-  .hero h4 {
-    margin-top: 40px;
-    font-size: 1rem;
-  }
-}
-
+/* === МИССИЯ === */
 .mission-section {
   margin-top: 60px;
-  padding: 80px 40px;
+  padding: 80px 20px;
   background: white;
 }
 
@@ -280,14 +236,16 @@ header .map {
 
 .mission-visual {
   text-align: center;
-  position: relative;
   margin-top: 40px;
 }
 
 .mission-visual img {
   border-radius: 30px;
+  width: 100%;
+  height: auto;
 }
 
+/* === ИСТОРИЯ === */
 .origin-section {
   padding: 80px 20px;
   background: #f8f9fa;
@@ -313,42 +271,36 @@ header .map {
 .timeline-item {
   display: flex;
   flex-direction: column;
-  align-items: stretch;
   margin-bottom: 50px;
+  padding-left: 60px;
   position: relative;
 }
 
 .timeline-date {
-  width: 100px;
-  flex-shrink: 0;
-  text-align: left;
-  margin-right: 0;
-  margin-bottom: 10px;
-  padding-right: 30px;
+  position: absolute;
+  left: 0;
+  top: 20px;
   font-weight: 600;
   color: #667eea;
 }
 
 .timeline-marker {
+  position: absolute;
+  left: -9px;
+  top: 20px;
   width: 20px;
   height: 20px;
   background: white;
   border: 3px solid #667eea;
   border-radius: 50%;
-  margin: 0 25px;
-  position: relative;
   z-index: 2;
-  flex-shrink: 0;
-  margin-top: 20px;
 }
 
 .timeline-content {
-  flex: 1;
   background: white;
   padding: 30px;
   border-radius: 15px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-  margin-left: 20px;
 }
 
 .timeline-title {
@@ -374,8 +326,10 @@ header .map {
   align-items: center;
   justify-content: center;
   color: #a0aec0;
+  font-size: 1.2rem;
 }
 
+/* === КОМАНДА === */
 .team-section {
   padding: 80px 20px;
   background: white;
@@ -472,11 +426,10 @@ header .map {
   display: flex;
   justify-content: center;
   gap: 15px;
+  margin-top: 20px;
 }
 
 .social-link {
-  margin-left: 30px;
-  padding: 0px 30px;
   width: 45px;
   height: 45px;
   background: #f7fafc;
@@ -484,10 +437,10 @@ header .map {
   display: flex;
   align-items: center;
   justify-content: center;
-  text-decoration: none;
   color: #667eea;
   font-weight: 500;
   transition: all 0.3s ease;
+  text-decoration: none;
 }
 
 .social-link:hover {
@@ -496,7 +449,7 @@ header .map {
   transform: translateY(-2px);
 }
 
-/* ===== БЛОК 5: ТЕХНОЛОГИИ ===== */
+/* === ТЕХНОЛОГИИ === */
 .tech-section {
   padding: 80px 20px;
   background: #f8f9fa;
@@ -529,12 +482,7 @@ header .map {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(102, 126, 234, 0.05),
-    transparent
-  );
+  background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.05), transparent);
   transition: left 0.5s ease;
 }
 
@@ -547,24 +495,12 @@ header .map {
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
 }
 
-.tech-card.frontend {
-  border-top-color: #ff6b6b;
-}
-.tech-card.backend {
-  border-top-color: #667eea;
-}
-.tech-card.database {
-  border-top-color: #4ecdc4;
-}
-.tech-card.map {
-  border-top-color: #45b7d1;
-}
-.tech-card.design {
-  border-top-color: #ffa07a;
-}
-.tech-card.tools {
-  border-top-color: #9b59b6;
-}
+.tech-card.frontend { border-top-color: #ff6b6b; }
+.tech-card.backend { border-top-color: #667eea; }
+.tech-card.database { border-top-color: #4ecdc4; }
+.tech-card.map { border-top-color: #45b7d1; }
+.tech-card.design { border-top-color: #ffa07a; }
+.tech-card.tools { border-top-color: #9b59b6; }
 
 .tech-icon {
   font-size: 3rem;
@@ -590,24 +526,7 @@ header .map {
   font-size: 0.95rem;
 }
 
-/* Адаптивность для технологий */
-@media (max-width: 1024px) {
-  .tech-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 768px) {
-  .tech-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
-  .tech-card {
-    padding: 30px 20px;
-  }
-}
-
+/* === ДОРОЖНАЯ КАРТА === */
 .future-section {
   padding: 80px 20px;
   background: white;
@@ -617,6 +536,7 @@ header .map {
   max-width: 1000px;
   margin: 0 auto;
   position: relative;
+  padding: 0 20px;
 }
 
 .roadmap-container::before {
@@ -628,13 +548,15 @@ header .map {
   width: 3px;
   background: linear-gradient(to bottom, #ffd93d, #6bcfb2, #667eea);
   transform: translateX(-50%);
+  z-index: 1;
 }
 
 .roadmap-phase {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   margin-bottom: 50px;
   position: relative;
+  z-index: 2;
 }
 
 .roadmap-phase:nth-child(odd) {
@@ -651,25 +573,13 @@ header .map {
   color: white;
   font-size: 1.3rem;
   font-weight: bold;
-  position: relative;
-  z-index: 2;
-  flex-shrink: 0;
   margin: 0 30px;
+  flex-shrink: 0;
 }
 
-.phase-marker.completed {
-  background: #4ade80;
-}
-.phase-marker.current {
-  background: #667eea;
-}
-.phase-marker.planned {
-  background: #94a3b8;
-}
-.phase-marker.future {
-  background: #e2e8f0;
-  color: #64748b;
-}
+.phase-marker.completed { background: #4ade80; }
+.phase-marker.current { background: #667eea; }
+.phase-marker.planned { background: #94a3b8; }
 
 .phase-content {
   flex: 1;
@@ -683,8 +593,9 @@ header .map {
 .phase-header {
   display: flex;
   align-items: center;
-  margin-bottom: 15px;
   gap: 15px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
 }
 
 .phase-status {
@@ -696,22 +607,9 @@ header .map {
   letter-spacing: 0.5px;
 }
 
-.status-completed {
-  background: #dcfce7;
-  color: #166534;
-}
-.status-current {
-  background: #dbeafe;
-  color: #1e40af;
-}
-.status-planned {
-  background: #fef3c7;
-  color: #92400e;
-}
-.status-future {
-  background: #f1f5f9;
-  color: #475569;
-}
+.status-completed { background: #dcfce7; color: #166534; }
+.status-current { background: #dbeafe; color: #1e40af; }
+.status-planned { background: #fef3c7; color: #92400e; }
 
 .phase-date {
   color: #64748b;
@@ -727,13 +625,12 @@ header .map {
 
 .phase-features {
   list-style: none;
-  padding: 0;
   margin: 15px 0;
+  padding-left: 0;
 }
 
 .phase-features li {
-  padding: 8px 0;
-  padding-left: 25px;
+  padding: 8px 0 8px 25px;
   position: relative;
   color: #64748b;
 }
@@ -746,37 +643,7 @@ header .map {
   font-weight: bold;
 }
 
-/* Адаптивность для roadmap */
-@media (max-width: 968px) {
-  .roadmap-container::before {
-    left: 30px;
-  }
-
-  .roadmap-phase {
-    flex-direction: row !important;
-    padding-left: 70px;
-  }
-
-  .phase-marker {
-    position: absolute;
-    left: 5px;
-    margin: 0;
-  }
-}
-
-@media (max-width: 768px) {
-  .phase-content {
-    padding: 25px 20px;
-  }
-
-  .phase-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
-}
-
-/* ===== БЛОК 7: КОНТАКТЫ ===== */
+/* === КОНТАКТЫ === */
 .contact-section {
   padding: 80px 20px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -789,7 +656,6 @@ header .map {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 60px;
-  align-items: start;
 }
 
 .contact-info {
@@ -804,7 +670,6 @@ header .map {
   font-size: 1.8rem;
   font-weight: 600;
   margin-bottom: 25px;
-  color: white;
 }
 
 .contact-description {
@@ -853,10 +718,10 @@ header .map {
 
 .contact-form {
   padding: 40px;
-  padding-right: 70px;
   background: white;
   border-radius: 20px;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+  color: #000;
 }
 
 .form-group {
@@ -877,8 +742,8 @@ header .map {
   border: 2px solid #e2e8f0;
   border-radius: 10px;
   font-size: 1rem;
-  transition: border-color 0.3s ease;
   font-family: inherit;
+  transition: border-color 0.3s ease;
 }
 
 .form-input:focus,
@@ -910,6 +775,7 @@ header .map {
   box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
 }
 
+/* === ФУТЕР (копия из main) === */
 .modern-footer {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
@@ -918,12 +784,13 @@ header .map {
 }
 
 .footer-container {
-  width: 1200px;
-  max-width: 95%;
+  max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
+  padding: 0 20px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
 }
 
 .footer-section h3,
@@ -950,7 +817,7 @@ header .map {
   align-items: center;
   gap: 10px;
   font-weight: 800;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
 }
 
 .footer-description {
@@ -963,11 +830,9 @@ header .map {
 .social-links {
   display: flex;
   gap: 15px;
-  font-size: 1.4rem;
 }
 
 .social-links a {
-  color: white;
   opacity: 0.9;
   transition: opacity 0.3s, transform 0.3s;
 }
@@ -979,17 +844,13 @@ header .map {
 
 .footer-links {
   list-style: none;
-  padding: 0;
 }
 
 .footer-links li {
   margin-bottom: 10px;
-  padding-left: 20px;
 }
 
-.footer-links a,
-.footer-links li {
-  text-decoration: none;
+.footer-links a {
   color: rgba(255, 255, 255, 0.9);
   transition: color 0.3s;
 }
@@ -999,56 +860,103 @@ header .map {
 }
 
 .footer-bottom {
-  width: 1200px;
-  max-width: 95%;
+  max-width: 1200px;
+  width: 100%;
   margin: 30px auto 0;
-  padding-top: 20px;
-  border-top: 1px solid rgba(255,255,255,0.15);
+  padding: 20px 20px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
   text-align: center;
   font-size: 0.9rem;
   opacity: 0.8;
 }
 
-/* Адаптивность */
-@media (max-width: 768px) {
-  .footer-container {
-    gap: 30px;
-  }
-
-  .footer-bottom {
-    padding-top: 15px;
+/* === АДАПТИВНОСТЬ === */
+@media (max-width: 1024px) {
+  .tech-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* Адаптивность для контактов */
 @media (max-width: 968px) {
   .contact-container {
     grid-template-columns: 1fr;
+  }
+
+  .mission-container {
+    grid-template-columns: 1fr;
     gap: 40px;
   }
-}
 
-@media (max-width: 768px) {
-  .contact-info,
-  .contact-form {
-    padding: 30px 25px;
+  .mission-content {
+    padding-right: 0;
+    text-align: center;
   }
 }
 
 @media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero {
+    padding: 60px 15px 45px;
+    margin: 40px 0;
+  }
+  .hero h2 { font-size: 2.2rem; }
+  .hero h3 { font-size: 1.2rem; }
+  .hero-button {
+    padding: 12px 30px;
+    font-size: 1.2rem;
+  }
+
   .roadmap-container::before {
     left: 20px;
+    transform: none;
   }
   .roadmap-phase {
-    padding-left: 50px !important;
+    flex-direction: column !important;
+    padding-left: 50px;
+  }
+  .roadmap-phase:nth-child(odd) {
+    flex-direction: column !important;
   }
   .phase-marker {
-    left: 5px !important;
+    position: absolute;
+    left: 5px;
+    margin: 0 0 15px 0;
+  }
+  .phase-content {
+    padding: 25px 20px;
+  }
+
+  .author-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-info, .contact-form {
+    padding: 30px 20px;
+  }
+
+  .footer-container {
+    gap: 25px;
   }
 }
 
+@media (max-width: 480px) {
+  .social-link {
+    width: 40px;
+    height: 40px;
+    font-size: 0.9rem;
+  }
+
+  .phase-features li {
+    font-size: 0.95rem;
+  }
+}
+
+/* Защита от zoom на iOS */
 .form-input,
 .form-textarea {
-  font-size: 16px; /* предотвращает zoom в Safari на iOS */
-  padding: 14px;
+  font-size: 16px;
 }
