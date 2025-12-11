@@ -128,14 +128,46 @@
   const SERVER_URL = window.location.origin;
   let map, selectedEmotion = null, clickCoords = null;
 
+  // Инициализация карты с геолокацией
   function initInteractiveMap() {
-    map = L.map('map').setView([50.424119, 41.01624], 12);
+    // Создаём карту без начального центра
+    map = L.map('map');
+
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap contributors'
     }).addTo(map);
 
+    // Пытаемся получить местоположение пользователя
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          map.setView([latitude, longitude], 14); // Зум 14 — ближе и персональнее
+          console.log("📍 Карта открыта по координатам пользователя:", latitude, longitude);
+        },
+        (error) => {
+          console.warn("⚠️ Геопозиция недоступна или отклонена:", error.message);
+          // Резерв: центрируем на Калач, Воронежская область
+          map.setView([50.424119, 41.01624], 12);
+        },
+        {
+          timeout: 10000,        // Макс. ожидание — 10 сек
+          maximumAge: 300000     // Использовать кэш до 5 минут
+        }
+      );
+    } else {
+      // Если браузер не поддерживает Geolocation
+      console.log("❌ Geolocation не поддерживается — используем Калач");
+      map.setView([50.424119, 41.01624], 12);
+    }
+
+    // Загружаем существующие метки
     loadMarkers();
-    map.on('click', (e) => showEmotionModal(e.latlng.lat, e.latlng.lng));
+
+    // Вешаем обработчик клика на карту
+    map.on('click', (e) => {
+      showEmotionModal(e.latlng.lat, e.latlng.lng);
+    });
   }
 
   async function loadMarkers() {
@@ -154,7 +186,9 @@
         const popup = `<b>${names[m.emotion]}</b>${m.comment ? `<br><i>${m.comment}</i>` : ''}`;
         L.marker([m.lat, m.lng], { icon }).addTo(map).bindPopup(popup);
       });
-    } catch (e) { console.error(e); }
+    } catch (e) {
+      console.error("Ошибка загрузки меток:", e);
+    }
   }
 
   function showEmotionModal(lat, lng) {
@@ -188,6 +222,7 @@
     setTimeout(() => el.remove(), 3000);
   }
 
+  // Запуск при загрузке страницы
   document.addEventListener('DOMContentLoaded', () => {
     initInteractiveMap();
 
@@ -212,7 +247,8 @@
         await saveMarker(clickCoords.lat, clickCoords.lng, selectedEmotion, comment);
         notify('Эмоция добавлена!');
         hideEmotionModal();
-        // Можно перезагрузить метки или добавить локально — как у тебя было
+        // Опционально: обновить метки без перезагрузки
+        // loadMarkers();
       } catch (e) {
         notify(`Ошибка: ${e.message}`, true);
       } finally {
@@ -226,7 +262,8 @@
     document.getElementById('emotionModal').addEventListener('click', (e) => {
       if (e.target === e.currentTarget) hideEmotionModal();
     });
-    // Исправление для Firefox и Safari
+
+    // Исправление для старых браузеров
     if (!window.location.origin) {
       window.location.origin = window.location.protocol + "//" + window.location.host;
     }
@@ -235,5 +272,6 @@
 
   </body>
 </html>
+
 
 
