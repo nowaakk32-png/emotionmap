@@ -11,11 +11,10 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../client")));
 
-// === PostgreSQL ===
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {
-    rejectUnauthorized: false // Нужно для Railway
+    rejectUnauthorized: false
   }
 });
 
@@ -93,6 +92,19 @@ app.get("/api/stats", async (req, res) => {
   }
 });
 
+app.get("/api/markers", async (req, res) => {
+  try {
+    console.log("🔍 Запрос меток...");
+    const result = await pool.query("SELECT * FROM markers");
+    console.log(`✅ Получено ${result.rowCount} меток`);
+    res.json(result.rows);
+  } catch (err) {
+    console.error("❌ Ошибка чтения меток:", err.message);
+    console.error("Стек:", err.stack);
+    res.status(500).json({ error: "Ошибка сервера" });
+  }
+});
+
 app.get("/admin/messages", async (req, res) => {
   try {
     const result = await pool.query("SELECT * FROM messages ORDER BY created_at DESC");
@@ -160,4 +172,5 @@ initDatabase().then(() => {
   app.listen(PORT, () => {
     console.log(`✅ EmotionMap запущен: http://localhost:${PORT}`);
   });
+
 });
