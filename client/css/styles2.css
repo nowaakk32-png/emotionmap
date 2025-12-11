@@ -271,18 +271,24 @@ header .active:hover {
 .timeline-item {
   display: flex;
   flex-direction: column;
+  align-items: stretch;
   margin-bottom: 50px;
-  padding-left: 60px;
   position: relative;
+  padding-left: 90px; /* ← добавь отступ слева */
 }
 
 .timeline-date {
-  position: absolute;
-  left: 0;
-  top: 20px;
+  width: auto;
+  min-width: 100px;
+  max-width: 180px;
+  text-align: left;
+  margin-right: 10px;
+  padding-right: 15px;
   font-weight: 600;
   color: #667eea;
-  padding-right: 40px;
+  word-wrap: break-word;
+  hyphens: auto;
+  overflow-wrap: break-word;
 }
 
 .timeline-marker {
@@ -962,5 +968,26 @@ header .active:hover {
   font-size: 16px;
 }
 
+@media (max-width: 768px) {
+  .timeline-item {
+    padding-left: 15px;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .timeline-date {
+    width: auto;
+    max-width: 120px;
+    text-align: left;
+    margin-right: 10px;
+    padding-right: 0;
+    font-size: 0.9rem;
+  }
+
+  .timeline-content {
+    flex: 1;
+    padding: 20px;
+  }
+}
 
 
