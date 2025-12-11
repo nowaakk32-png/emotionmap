@@ -336,6 +336,15 @@ header .active:hover {
   font-size: 1.2rem;
 }
 
+.timeline-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover; /* ← чтобы фото не растягивалось, а обрезалось */
+  object-position: center; /* центрирование при обрезке */
+  display: block;
+}
+
 /* === КОМАНДА === */
 .team-section {
   padding: 80px 20px;
@@ -989,5 +998,6 @@ header .active:hover {
     padding: 20px;
   }
 }
+
 
 
