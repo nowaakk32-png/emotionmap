@@ -339,6 +339,7 @@ header .active:hover {
 .timeline-image img {
   width: 100%;
   height: auto;
+  max-height: 200px;
   border-radius: 10px;
   object-fit: cover; /* ← чтобы фото не растягивалось, а обрезалось */
   object-position: center; /* центрирование при обрезке */
@@ -998,6 +999,7 @@ header .active:hover {
     padding: 20px;
   }
 }
+
 
 
 
