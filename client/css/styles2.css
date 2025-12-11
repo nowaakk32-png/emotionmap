@@ -282,7 +282,7 @@ header .active:hover {
   top: 20px;
   font-weight: 600;
   color: #667eea;
-  margin-right: 40px;
+  padding-right: 40px;
 }
 
 .timeline-marker {
@@ -961,5 +961,6 @@ header .active:hover {
 .form-textarea {
   font-size: 16px;
 }
+
 
 
