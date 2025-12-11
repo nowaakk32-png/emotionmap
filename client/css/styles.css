@@ -1,13 +1,8 @@
+/* === ГЛОБАЛЬНЫЕ СТИЛИ === */
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
-body {
-  background-image: url(../assests/icons/pedro-lastra-Nyvq2juw4_o-unsplash.jpg);
-  background-attachment: fixed;
-  background-size: cover;
-  background-position: top center;
-  background-repeat: no-repeat;
-}
 
-* {
+*, *::before, *::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
@@ -19,119 +14,109 @@ html {
 body {
   font-family: "Montserrat", sans-serif;
   font-weight: 400;
-}
-
-#map {
-  padding-left: 10px;
-  padding-right: 10px;
-  height: 500px;
-  border: 2px solid #ccc;
-  border-radius: 10px;
+  background-image: url(../assests/icons/pedro-lastra-Nyvq2juw4_o-unsplash.jpg);
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+  color: #000;
 }
 
 a {
   text-decoration: none;
+  color: inherit;
 }
 
 img {
   max-width: 100%;
+  height: auto;
 }
 
+/* === КОНТЕЙНЕР === */
 .container {
-  width: 1400px;
-  max-width: 95%;
+  max-width: 1400px;
+  width: 100%;
   margin: 0 auto;
-  padding-bottom: 30px; /* ← именно так! */
+  padding: 0 20px 30px;
+  background: #fff;
+  border-radius: 30px;
 }
 
+/* === ШАПКА === */
 header {
-  width: 1400px;
+  max-width: 1400px;
+  width: 100%;
   margin: 0 auto;
-  padding: 50px 0;
+  padding: 50px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
 header .logo {
   text-transform: uppercase;
   font-weight: 800;
-}
-
-header .logo {
   background: #fff;
   padding: 15px 17px;
   border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.2rem;
 }
 
-header nav {
-  float: right;
-  width: 50%;
+header span img {
+  display: block;
 }
 
 header nav ul {
   list-style: none;
   display: flex;
-  justify-content: space-between;
-}
-
-header nav ul li {
-  display: inline-block;
-  font-weight: 600;
-}
-
-header nav ul {
+  gap: 20px;
   background: #fff;
   padding: 9px 17px;
   border-radius: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 header nav ul li a {
-  color: #000000;
+  color: #000;
+  font-weight: 600;
+  transition: font-weight 0.3s ease;
 }
 
-header nav ul li:hover {
+header nav ul li a:hover {
   font-weight: 900;
-  transition: all 700ms ease;
-  transition: all 500ms ease-in;
 }
 
-header span img {
-  position: relative;
-  top: 7px;
-}
-
-.container {
-  background: #fff;
-  border-radius: 30px;
-}
-
-/* === УПРОЩЁННАЯ HERO-СЕКЦИЯ (БЕЗ ФОНА, ТЁМНЫЙ ТЕКСТ) === */
+/* === HERO === */
 .hero {
   text-align: center;
   padding: 80px 20px 60px;
   margin: 60px auto;
   max-width: 900px;
-  /* Полностью прозрачно — фон страницы просвечивает */
   background: transparent;
-  box-shadow: none;
-  border: none;
 }
 
 .hero h2 {
-  font-size: 3.0rem;
+  font-size: 3rem;
   font-weight: 800;
   margin-bottom: 20px;
-  color: #1a1a1a; /* Почти чёрный */
+  color: #1a1a1a;
   line-height: 1.2;
 }
 
 .hero h3 {
   font-size: 1.4rem;
   font-weight: 400;
-  color: #333333; /* Тёмно-серый */
+  color: #333;
   margin-bottom: 12px;
   line-height: 1.5;
   max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
+  margin-inline: auto;
 }
 
 .hero-button {
@@ -141,7 +126,6 @@ header span img {
   font-size: 1.3rem;
   font-weight: 600;
   color: white;
-  text-decoration: none;
   background: linear-gradient(135deg, #667eea, #764ba2);
   border-radius: 50px;
   box-shadow: 0 4px 15px rgba(102, 126, 234, 0.35);
@@ -156,7 +140,7 @@ header span img {
 .hero h4 {
   margin-top: 50px;
   font-size: 1.05rem;
-  color: #666666; /* Серый */
+  color: #666;
   animation: bounce-arrow 2s infinite;
 }
 
@@ -166,28 +150,7 @@ header span img {
   60% { transform: translateY(-5px); }
 }
 
-/* Адаптивность */
-@media (max-width: 768px) {
-  .hero {
-    padding: 60px 15px 45px;
-    margin: 40px 15px;
-  }
-  .hero h2 {
-    font-size: 2.2rem;
-  }
-  .hero h3 {
-    font-size: 1.2rem;
-  }
-  .hero-button {
-    padding: 12px 30px;
-    font-size: 1.2rem;
-  }
-  .hero h4 {
-    margin-top: 40px;
-    font-size: 1rem;
-  }
-}
-
+/* === HOW IT WORKS === */
 .how-it-works {
   padding: 80px 20px;
   background: #fff;
@@ -204,14 +167,16 @@ header span img {
 
 .steps-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
   max-width: 1200px;
   margin: 0 auto;
-  gap: 30px;
 }
 
 .step-card {
-  flex: 1;
+  flex: 1 1 300px;
+  min-width: 0; /* ← ключ к адаптивности в flex */
   background: white;
   padding: 40px 25px;
   border-radius: 20px;
@@ -228,7 +193,6 @@ header span img {
 .step-icon {
   font-size: 3rem;
   margin-bottom: 20px;
-  display: block;
 }
 
 .step-number {
@@ -261,138 +225,22 @@ header span img {
   font-size: 1rem;
 }
 
+/* === КАРТА === */
 .realmap {
-  padding-top: 60px;
-  padding-bottom: 30px;
-}
-
-/* Стили для фильтров */
-.filter-container {
-  display: flex;
-  gap: 10px;
-  margin: 20px 0;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.filter-btn {
-  padding: 10px 20px;
-  border: 2px solid #e2e8f0;
-  background: white;
-  border-radius: 25px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-weight: 500;
-}
-
-.filter-btn:hover {
-  border-color: #667eea;
-  transform: translateY(-2px);
-}
-
-.filter-btn.active {
-  background: #667eea;
-  color: white;
-  border-color: #667eea;
-}
-
-/* Стили для статистики */
-.stats-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-  margin: 20px 0;
-}
-
-.stat-card {
-  background: white;
-  padding: 20px;
-  border-radius: 15px;
+  padding: 60px 0 30px;
   text-align: center;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  border-top: 4px solid #667eea;
 }
 
-.stat-number {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #667eea;
-  margin-bottom: 5px;
+#map {
+  height: 500px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.stat-label {
-  color: #718096;
-  font-size: 0.9rem;
-}
-
-/* Распределение эмоций */
-.emotion-distribution {
-  background: white;
-  padding: 20px;
-  border-radius: 15px;
-  margin: 20px 0;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-.emotion-distribution-item {
-  margin-bottom: 15px;
-}
-
-.emotion-distribution-header {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 5px;
-  font-size: 0.9rem;
-}
-
-.emotion-distribution-bar {
-  height: 8px;
-  background: #e2e8f0;
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.emotion-distribution-fill {
-  height: 100%;
-  border-radius: 4px;
-  transition: width 0.5s ease;
-}
-
-.emotion-happy {
-  background: #ffd93d;
-}
-.emotion-calm {
-  background: #6bcfb2;
-}
-.emotion-neutral {
-  background: #e8e8e8;
-}
-.emotion-sad {
-  background: #7aa2e3;
-}
-.emotion-angry {
-  background: #ff6b6b;
-}
-
-/* Попапы */
-.popup-content {
-  text-align: center;
-  min-width: 200px;
-}
-
-.filter-stats {
-  text-align: center;
-  color: #718096;
-  margin: 10px 0;
-  font-size: 0.9rem;
-}
-
-.error {
-  color: #ff6b6b;
-  text-align: center;
-  padding: 20px;
-}
-
+/* === СТАТИСТИКА === */
 .stats-section {
   padding: 80px 20px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -416,7 +264,7 @@ header span img {
 .stat-card {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
-  padding: 40px 30px;
+  padding: 40px 3  0px;
   border-radius: 20px;
   text-align: center;
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -434,6 +282,7 @@ header span img {
   background: linear-gradient(135deg, #ffd93d, #ff6b6b);
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
 }
 
 .stat-label {
@@ -455,10 +304,13 @@ header span img {
 .trend-up {
   color: #4ade80;
 }
-.trend-down {
-  color: #f87171;
+
+/* === ПОСЛЕДНИЕ ЭМОЦИИ (заглушка) === */
+.lastem {
+  height: 20px;
 }
 
+/* === WHY SECTION === */
 .why-section {
   padding: 80px 20px;
   background: #fff;
@@ -468,7 +320,7 @@ header span img {
 
 .why-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 30px;
   max-width: 1200px;
   margin: 0 auto;
@@ -502,7 +354,6 @@ header span img {
 .why-icon {
   font-size: 3.5rem;
   margin-bottom: 20px;
-  display: block;
 }
 
 .why-title {
@@ -528,6 +379,8 @@ header span img {
   margin-bottom: 15px;
   font-weight: 500;
 }
+
+/* === ФУТЕР === */
 .modern-footer {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
@@ -536,12 +389,13 @@ header span img {
 }
 
 .footer-container {
-  width: 1200px;
-  max-width: 95%;
+  max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
+  padding: 0 20px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
 }
 
 .footer-section h3,
@@ -568,7 +422,7 @@ header span img {
   align-items: center;
   gap: 10px;
   font-weight: 800;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
 }
 
 .footer-description {
@@ -581,11 +435,9 @@ header span img {
 .social-links {
   display: flex;
   gap: 15px;
-  font-size: 1.4rem;
 }
 
 .social-links a {
-  color: white;
   opacity: 0.9;
   transition: opacity 0.3s, transform 0.3s;
 }
@@ -597,16 +449,13 @@ header span img {
 
 .footer-links {
   list-style: none;
-  padding: 0;
 }
 
 .footer-links li {
   margin-bottom: 10px;
 }
 
-.footer-links a,
-.footer-links li {
-  text-decoration: none;
+.footer-links a {
   color: rgba(255, 255, 255, 0.9);
   transition: color 0.3s;
 }
@@ -616,28 +465,17 @@ header span img {
 }
 
 .footer-bottom {
-  width: 1200px;
-  max-width: 95%;
+  max-width: 1200px;
+  width: 100%;
   margin: 30px auto 0;
-  padding-top: 20px;
-  border-top: 1px solid rgba(255,255,255,0.15);
+  padding: 20px 20px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
   text-align: center;
   font-size: 0.9rem;
   opacity: 0.8;
 }
 
-/* Адаптивность */
-@media (max-width: 768px) {
-  .footer-container {
-    gap: 30px;
-  }
-
-  .footer-bottom {
-    padding-top: 15px;
-  }
-}
-
-/* Убираем фон у контейнера Leaflet */
+/* === LEAFLET === */
 .leaflet-marker-icon.leaflet-div-icon {
   background: transparent !important;
   border: none !important;
@@ -654,10 +492,7 @@ header span img {
   font-size: 18px;
   font-weight: bold;
   color: white;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-  background: transparent; /* ← КЛЮЧЕВОЙ МОМЕНТ — прозрачный фон */
-  border: none;
-  box-shadow: none;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
   padding: 0;
   margin: 0;
   line-height: 1;
@@ -667,9 +502,69 @@ header span img {
   transform: scale(1.15);
 }
 
-/* Цвета для каждой эмоции */
-.marker-happy   { background: linear-gradient(135deg, #FFD700, #FFA500); } /* Золотой */
-.marker-calm    { background: linear-gradient(135deg, #00C853, #009624); } /* Зелёный */
-.marker-neutral { background: linear-gradient(135deg, #9E9E9E, #616161); } /* Серый */
-.marker-sad     { background: linear-gradient(135deg, #2962FF, #0D47A1); } /* Синий */
-.marker-angry   { background: linear-gradient(135deg, #FF1744, #D50000); } /* Красный */
+.marker-happy   { background: linear-gradient(135deg, #FFD700, #FFA500); }
+.marker-calm    { background: linear-gradient(135deg, #00C853, #009624); }
+.marker-neutral { background: linear-gradient(135deg, #9E9E9E, #616161); }
+.marker-sad     { background: linear-gradient(135deg, #2962FF, #0D47A1); }
+.marker-angry   { background: linear-gradient(135deg, #FF1744, #D50000); }
+
+/* === АДАПТИВНОСТЬ === */
+@media (max-width: 1024px) {
+  .hero h2 { font-size: 2.6rem; }
+  .section-title { font-size: 2.2rem; }
+}
+
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  header nav ul {
+    justify-content: center;
+  }
+
+  .container, header {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .hero {
+    padding: 60px 15px 45px;
+    margin: 40px 0;
+  }
+  .hero h2 { font-size: 2.2rem; }
+  .hero h3 { font-size: 1.2rem; }
+  .hero-button {
+    padding: 12px 30px;
+    font-size: 1.2rem;
+  }
+  .hero h4 {
+    margin-top: 40px;
+    font-size: 1rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+    margin-bottom: 40px;
+  }
+
+  .steps-container,
+  .why-grid {
+    gap: 20px;
+  }
+
+  .stat-number {
+    font-size: 2.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .step-card,
+  .why-card {
+    padding: 30px 20px;
+  }
+
+  .hero h2 { font-size: 1.9rem; }
+  .section-title { font-size: 1.8rem; }
+}
