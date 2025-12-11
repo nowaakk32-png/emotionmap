@@ -1000,6 +1000,17 @@ header .active:hover {
   }
 }
 
+@media (max-width: 768px) {
+  .timeline-image {
+    max-width: 100%;
+    margin: 10px 0;
+  }
+
+  .timeline-image img {
+    width: 100%;
+    height: auto;
+  }
+}
 
 
 
